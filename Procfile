@@ -1,0 +1,1 @@
+web: gunicorn feedbackanalysis.wsgi --log-file -

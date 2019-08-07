@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<title>FeedBack Analysis</title>
+	<head>
+			{% load static %}
+	
+	   <!--- basic page needs
+	   ================================================== -->
+	   <meta charset="utf-8">
+		<title>abhikumar22</title>
+		<meta name="description" content="">  
+		<meta name="author" content="">
+	
+	   <!-- mobile specific metas
+	   ================================================== -->
+	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!-- <link rel="stylesheet" href="{% static 'path/to/font-awesome/css/font-awesome.min.css' %}"> -->
+	
+		 <!-- CSS
+	   ================================================== -->
+	   <link rel="stylesheet" href="{% static 'css/base.css' %}">  
+	   <link rel="stylesheet" href="{% static 'css/main.css' %}">
+	   <!-- <link rel="stylesheet" href="{% static 'css/vendor.css' %}">      -->
+	
+	   <!-- script
+	   ================================================== -->   
+		<script src="{% static 'js/modernizr.js' %}"></script>
+		<script src="{% static 'js/pace.min.js' %}"></script>
+	
+	   <!-- favicons
+		================================================== -->
+		<link rel="icon" type="image/png" href="{% static 'feedback.ico' %}">
+	
+	</head>
+
+	<section id="contact">
+
+		<div class="row section-intro">
+   		<div class="col-twelve">
+
+   			<h5>FeedBack Form</h5>
+   			<h1>I'd Love To Hear From You.</h1>
+
+   			<p class="lead">Any Suggestions</p>
+
+   		</div> 
+   	</div> <!-- /section-intro -->
+
+   	<div class="row contact-form">
+
+   		<div class="col-twelve">
+
+            <!-- form -->
+				<form action="formValidation">
+				  <textarea name="feedback" placeholder="Enter you feedback here" placeholder="Message" rows="5" cols="50" required=""></textarea>
+				  <input id="buttoncontact" type="submit" value="Submit">
+				</form>
+			  <!-- Form End -->
+			  
+			  <p>{{phn}}</p>
+
+         </div> <!-- /col-twelve -->
+   		
+   	</div> <!-- /contact-form -->
+
+   	<!-- <div class="row contact-info"> -->
+
+   		<!-- <div class="col-four tab-full"> -->
+
+   			<!-- <div class="icon"> -->
+   				<!-- <i class="icon-pin"></i> -->
+   			<!-- </div> -->
+
+   			<!-- <h5>Where to find me</h5> -->
+
+   			<!-- <p> -->
+            <!-- MDC Sector 4, Panchkula<br> -->
+            <!-- Haryana - 134009<br> -->
+            
+            <!-- </p> -->
+
+   		<!-- </div> -->
+
+   		<!-- <div class="col-four tab-full collapse"> -->
+
+   			<!-- <div class="icon"> -->
+   				<!-- <i class="icon-mail"></i> -->
+   			<!-- </div> -->
+
+   			<!-- <h5>Email</h5> -->
+
+   			<!-- <p>abhi.ckp1002@gmail.com<br> -->
+			   	<!-- info@kardswebsite.com			      -->
+			   <!-- </p> -->
+
+   		<!-- </div> -->
+
+   		<!-- <div class="col-four tab-full"> -->
+
+   			<!-- <div class="icon"> -->
+   				<!-- <i class="icon-phone"></i> -->
+   			<!-- </div> -->
+
+   			<!-- <h5>Call Me At</h5> -->
+
+   			<!-- <p>Phone: (+91) 8342962927(Whatsapp Only)<br> -->
+			   	<!-- Mobile: (+63) 7538084090<br> -->
+			     	<!-- Fax: (+63) 555 0101 -->
+			   <!-- </p> -->
+
+   		<!-- </div> -->
+   		
+   	<!-- </div> <!-- /contact-info --> <!-->
+		
+	</section> <!-- /contact -->
+</div>
+
+</body>
+</html>
