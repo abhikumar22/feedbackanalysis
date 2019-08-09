@@ -26,9 +26,9 @@ def baseurl(request):
 def formValidation(request):
     feedback = request.GET['feedback']
 
-    classifier_object = Classifier()
-    classifier_object.feedback=feedback
-    Classifier.set_val(classifier_object)
+#     classifier_object = Classifier()
+#     classifier_object.feedback=feedback
+#     Classifier.set_val(classifier_object)
 
     # text = tokenizer("hello")
     # text = preprocessor("hello")
