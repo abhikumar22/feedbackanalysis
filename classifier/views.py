@@ -55,7 +55,7 @@ def formValidation(request):
 
     # k = staticfiles_storage.url(path, force=True)
 
-    file_path = os.path.join(settings.STATIC_ROOT, 'data\clf.pkl')
+    file_path = os.path.join(settings.STATIC_ROOT, 'data/clf.pkl')
     with open(file_path, 'rb') as f:
         clf=pickle.load(f)
 
