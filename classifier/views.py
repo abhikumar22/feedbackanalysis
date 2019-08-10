@@ -15,7 +15,10 @@ import json
 import re   
 import os
 import pickle
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.conf import settings
+
+
 # Create your views here.
 # @api_view(["GET"])
 def baseurl(request):
@@ -33,9 +36,27 @@ def formValidation(request):
     # text = tokenizer("hello")
     # text = preprocessor("hello")
 
-    modulePath = os.path.dirname(__file__)
-    filePath = os.path.join(modulePath, 'clf.pkl')
-    with open(filePath, 'rb') as f:
+    # modulePath = os.path.dirname(__file__)
+    # filePath = os.path.join(modulePath, 'clf.pkl')
+    # url = static('data\clf.pkl')
+    # with open(filePath, 'rb') as f:
+    #     clf=pickle.load(f)
+
+    # list = []
+    # list.append(feedback)
+    # preds = clf.predict(list)
+
+    # if(preds[0]==1):
+    #     return render(request,'classifier/index.html',{'phn':'Positive Feedback'})
+    # else:
+    #     return render(request,'classifier/index.html',{'phn':'Negative FeedBack'})
+
+    # path = 'data\clf.pkl'
+
+    # k = staticfiles_storage.url(path, force=True)
+
+    file_path = os.path.join(settings.STATIC_ROOT, 'data\clf.pkl')
+    with open(file_path, 'rb') as f:
         clf=pickle.load(f)
 
     list = []
