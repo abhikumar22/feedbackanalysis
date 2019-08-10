@@ -36,12 +36,16 @@ def formValidation(request):
     modulePath = os.path.dirname(__file__)
     filePath = os.path.join(modulePath, 'clf.pkl')
     with open(filePath, 'rb') as f:
-        obj=pickle.load(f)
+        clf=pickle.load(f)
 
+    list = []
+    list.append(feedback)
+    preds = clf.predict(list)
+
+    if(preds[0]==1):
+        return render(request,'classifier/index.html',{'phn':'Positive Feedback'})
+    else:
+        return render(request,'classifier/index.html',{'phn':'Negative FeedBack'})
    
-
-    return render(request,'classifier/index.html',{'phn':modulePath})
-    
-    # model = pickle.load(open('/data/logisticRegression.pkl', 'rb'))
 
     
