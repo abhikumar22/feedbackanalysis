@@ -25,7 +25,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 SECRET_KEY = 'r+gtnz8)rn86^^!z9snbc1qa(zd(e1)xo^_n=7!*+c9zkmhv(p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
