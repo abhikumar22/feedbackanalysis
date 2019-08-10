@@ -2,6 +2,20 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import re 
+
+
+def tokenizer(text):
+    return text.split(' ')
+    
+def preprocessor(text):
+    """ Return a cleaned version of text
+    """
+    text = re.sub('<[^>]*>', '', text)
+    emoticons = re.findall('(?::|;|=)(?:-)?(?:\)|\(|D|P)', text)
+    text = (re.sub('[\W]+', ' ', text.lower()) + ' ' + ' '.join(emoticons).replace('-', ''))
+    return text
+
 
 
 def main():
