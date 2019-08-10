@@ -18,6 +18,24 @@ import pickle
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf import settings
 
+from nltk.stem import PorterStemmer
+
+porter = PorterStemmer()
+
+def tokenizer(text):
+    return text.split()
+
+def tokenizer_porter(text):
+    return [porter.stem(word) for word in text.split()]
+    
+def preprocessor(text):
+    """ Return a cleaned version of text
+    """
+    text = re.sub('<[^>]*>', '', text)
+    emoticons = re.findall('(?::|;|=)(?:-)?(?:\)|\(|D|P)', text)
+    text = (re.sub('[\W]+', ' ', text.lower()) + ' ' + ' '.join(emoticons).replace('-', ''))
+    return text
+
 
 # Create your views here.
 # @api_view(["GET"])
@@ -28,6 +46,18 @@ def baseurl(request):
 
 def formValidation(request):
     feedback = request.GET['feedback']
+
+    ss = preprocessor(feedback)
+    text = tokenizer(ss)
+    k = tokenizer_porter(ss)
+    ff= []
+    ff = ' '.join(k)
+    list =[]
+    list.append(ff)
+    file_path = os.path.join(settings.STATIC_ROOT, 'data/clf.pkl')
+    with open(file_path, 'rb') as f:
+        clf=pickle.load(f)
+    preds = clf.predict(list)
 
 #     classifier_object = Classifier()
 #     classifier_object.feedback=feedback
@@ -55,13 +85,13 @@ def formValidation(request):
 
     # k = staticfiles_storage.url(path, force=True)
 
-    file_path = os.path.join(settings.STATIC_ROOT, 'data/clf.pkl')
-    with open(file_path, 'rb') as f:
-        clf=pickle.load(f)
+    # file_path = os.path.join(settings.STATIC_ROOT, 'data/clf.pkl')
+    # with open(file_path, 'rb') as f:
+    #     clf=pickle.load(f)
 
-    list = []
-    list.append(feedback)
-    preds = clf.predict(list)
+    # list = []
+    # list.append(feedback)
+    # preds = clf.predict(list)
 
     if(preds[0]==1):
         return render(request,'classifier/index.html',{'phn':'Positive Feedback'})
