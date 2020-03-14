@@ -25,4 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$',views.baseurl),
     path('formValidation/', views.formValidation),
+    url('^getPrediction$', views.getPrediction),
+
 ] 

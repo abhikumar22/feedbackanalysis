@@ -17,8 +17,9 @@ import os
 import pickle
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf import settings
-
+from rest_framework import status
 from nltk.stem import PorterStemmer
+from django.views.decorators.csrf import csrf_exempt 
 
 porter = PorterStemmer()
 
@@ -58,12 +59,39 @@ def formValidation(request):
     with open(file_path, 'rb') as f:
         clf=pickle.load(f)
     preds = clf.predict(list)
+    
+    prob_neg, prob_pos = clf.predict_proba(list)[0]
+    s = 'Positive Feedback' if prob_pos >= prob_neg else 'Negative Feedback'
+    p = prob_pos if prob_pos >= prob_neg else prob_neg
+    res = '<h1>'+s+' with probability '+str(p)+'</h1>'
+    return HttpResponse(res)
 
+@csrf_exempt
+def getPrediction(request):
+    json_data = json.loads(request.body)
+    feedback = json_data.get("feedback")
+    print("pppppp",feedback)
+    
+    ss = preprocessor(feedback)
+    text = tokenizer(ss)
+    k = tokenizer_porter(ss)
+    ff= []
+    ff = ' '.join(k)
+    list =[]
+    list.append(ff)
+    file_path = os.path.join(settings.STATIC_ROOT, 'data/clf.pkl')
+    with open(file_path, 'rb') as f:
+        clf=pickle.load(f)
+    prob_neg, prob_pos = clf.predict_proba(list)[0]
+    pred = 1 if prob_pos >= prob_neg else 0
+    rate = prob_pos if prob_pos >= prob_neg else prob_neg
 
-    if(preds[0]==1):
-        return HttpResponse('<h1>Positive Feedback</h1>')
-    else:
-        return HttpResponse('<h1>Negative FeedBack</h1>')
+    data = {
+            "prediction": pred,
+            "rate": rate
+        }
+
+    return JsonResponse(data, status=status.HTTP_200_OK)
    
 
     
